@@ -5,20 +5,28 @@
       <div class="card-header card-header-linkeable" data-toggle="collapse" (click)="toggleDescripcion()"
         [attr.data-target]="'#collapse'+persona.id" aria-expanded="false" [attr.aria-controls]="'collapse'+persona.id">
         <h5 class="persona-title">{{ persona.nombre }} {{ persona.apellido }}
+          <span *ngIf="persona.rutNoValido || persona.telefonoNoValido" class="badge badge-danger">
+            <ng-template [ngIf]="persona.rutNoValido || persona.telefonoNoValido" [ngIfElse]="two">
+              <span>1</span>
+            </ng-template>
+            <ng-template #two>
+              <span>2</span>
+            </ng-template>
+          </span>
           <span class="float-right">
-          <strong *ngIf="showDescripcion" (click)="toggleDescripcion()">></strong>
-          <strong *ngIf="!showDescripcion" (click)="toggleDescripcion()">∨</strong>
+            <strong *ngIf="showDescripcion" (click)="toggleDescripcion()">></strong>
+            <strong *ngIf="!showDescripcion" (click)="toggleDescripcion()">∨</strong>
           </span>
         </h5>
       </div>
       <div class="card-body collapse" [id]="'collapse'+persona.id" [attr.aria-labelledby]="'heading'+persona.id"
         [attr.data-parent]="'#accordion'+persona.id">
         <table class="table table-striped">
-          <tr>
+          <tr [class]="persona.rutNoValido ? 'table-danger' : ''">
             <th>Rut</th>
             <td>{{ persona.rut }}</td>
           </tr>
-          <tr>
+          <tr [class]="persona.telefonoNoValido ? 'table-danger' : ''">
             <th>Teléfono</th>
             <td>{{ persona.telefono }}</td>
           </tr>

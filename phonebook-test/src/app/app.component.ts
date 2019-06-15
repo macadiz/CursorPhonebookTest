@@ -13,8 +13,14 @@ import Validar from './utils/Validar';
 export class AppComponent {
   title = 'phonebook-test';
   personas: any[] = [];
+
   personasDisplay = [];
   sinResultados = false;
+
+  regiones: any[] = [];
+  comunas: any[] = [];
+  selectedRegion = 0;
+  selectedComuna = 0;
 
   constructor(
     protected personasService: PersonasService,
@@ -48,15 +54,42 @@ export class AppComponent {
         console.error(error);
       }
     )
+
+    this.regionesService.getRegiones().subscribe((data) => {
+      this.regiones = data as any[];
+      this.regiones = this.regiones.map((r)=> {
+        r.nombre = UTF8.decode(r.nombre);
+        r.comunas.map((c)=> {
+          c.nombre = UTF8.decode(c.nombre);
+          return c;
+        });
+        return r;
+      });
+    },
+      (error) => {
+        console.error(error);
+      })
   }
 
   buscar(form) {
     let busquedaPersonas = this.personas.filter((p) => {
       var nombreCompleto = p.nombre ? p.nombre + (p.apellido ? " " + p.apellido : "") : p.apellido ? p.apellido : "";
-      return nombreCompleto.toLowerCase().indexOf(form.nombre.toLowerCase()) != -1 && p.activo == 1;
+      return nombreCompleto.toLowerCase().indexOf(form.nombre.toLowerCase()) != -1 && p.activo == 1 && (this.selectedComuna ? p.direccion.comuna.id == this.selectedComuna : true);
     });
     this.sinResultados = busquedaPersonas.length == 0;
     this.personasDisplay = busquedaPersonas != null ? busquedaPersonas : [];
   }
 
+  setRegion(reg): void {
+    this.selectedComuna = null;
+    this.selectedRegion = reg;
+    let region = this.regiones.find((r)=> {
+      return r.id == reg;
+    })
+    this.comunas = region ? region.comunas : [];
+  }
+
+  setComuna(comuna): void {
+    this.selectedComuna = comuna;
+  }
 }

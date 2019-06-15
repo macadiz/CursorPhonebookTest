@@ -27,6 +27,35 @@
     </div>
     <div class="row">
       <div class="col col-xs-12">
+        <div class="row">
+          <div class="col col-xs-12">
+            <h5>Filtros</h5>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col col-xs-3">
+            Region
+          </div>
+          <div class="col col-xs-3">
+            <select name="selectedRegion" [(ngModel)]="selectedRegion" (change)="setRegion($event.target.value)"
+              class="form-control" required>
+              <option *ngFor="let region of regiones" [value]="region.id">{{region.nombre}}</option>
+            </select>
+          </div>
+          <div class="col col-xs-3">
+            Comuna
+          </div>
+          <div class="col col-xs-3">
+            <select name="seletedComuna" [(ngModel)]="selectedComuna" (change)="setComuna($event.target.value)"
+              class="form-control" required>
+              <option *ngFor="let comuna of comunas" [value]="comuna.id">{{comuna.nombre}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col col-xs-12">
         <div *ngIf="personasDisplay.length > 0">
           <h2>{{ personasDisplay.length }} Personas encontradas</h2>
           <div *ngFor="let persona of personasDisplay">

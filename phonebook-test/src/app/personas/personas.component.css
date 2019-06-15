@@ -1,0 +1,11 @@
+.persona-title {
+    text-align: left;
+}
+
+.persona-row {
+    margin: 5px;
+}
+
+.card-header-linkeable {
+    cursor: pointer;
+}

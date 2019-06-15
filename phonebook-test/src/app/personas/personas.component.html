@@ -1,0 +1,37 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div class="row persona-row" [id]="'accordion'+persona.id">
+  <div class="col col-xs-12">
+    <div class="card" style="width: 100%">
+      <div class="card-header card-header-linkeable" data-toggle="collapse" (click)="toggleDescripcion()"
+        [attr.data-target]="'#collapse'+persona.id" aria-expanded="false" [attr.aria-controls]="'collapse'+persona.id">
+        <h5 class="persona-title">{{ persona.nombre }} {{ persona.apellido }}
+          <span class="float-right">
+          <strong *ngIf="showDescripcion" (click)="toggleDescripcion()">></strong>
+          <strong *ngIf="!showDescripcion" (click)="toggleDescripcion()">∨</strong>
+          </span>
+        </h5>
+      </div>
+      <div class="card-body collapse" [id]="'collapse'+persona.id" [attr.aria-labelledby]="'heading'+persona.id"
+        [attr.data-parent]="'#accordion'+persona.id">
+        <table class="table table-striped">
+          <tr>
+            <th>Rut</th>
+            <td>{{ persona.rut }}</td>
+          </tr>
+          <tr>
+            <th>Teléfono</th>
+            <td>{{ persona.telefono }}</td>
+          </tr>
+          <tr>
+            <th>Dirección</th>
+            <td>{{ persona.direccion.calle }} #{{ persona.direccion.numero }}</td>
+          </tr>
+          <tr>
+            <th>Comuna</th>
+            <td>{{ persona.direccion.comuna.nombre }}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -32,7 +32,7 @@
           <div *ngFor="let persona of personasDisplay">
             <div class="row">
               <div class="col col-xs-12">
-                {{ persona.nombre }} {{ persona.apellido }}
+                <personas-component [persona]="persona"></personas-component>
               </div>
             </div>
           </div>

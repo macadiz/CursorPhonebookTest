@@ -2,6 +2,7 @@ import { Component, NgModule } from '@angular/core';
 import { PersonasService } from './services/PersonasService';
 import { RegionesService } from './services/RegionesService';
 import UTF8 from './utils/UTF8';
+import Validar from './utils/Validar';
 
 @Component({
   selector: 'app-root',
@@ -26,6 +27,12 @@ export class AppComponent {
       (data) => {
         this.personas = data as any[];
         this.personas = this.personas.map((p) => {
+          if (!Validar.Rut(p.rut)) {
+            p.rutNoValido = true;
+          }
+          if (!Validar.Telefono(p.telefono)) {
+            p.telefonoNoValido = true;
+          }
           p.nombre = UTF8.decode(p.nombre);
           p.apellido = UTF8.decode(p.apellido);
           if (p.direccion) {

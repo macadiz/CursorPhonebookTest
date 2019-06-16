@@ -2,7 +2,7 @@
 
 Proyecto entregado por Cursor S.A. para poner a prueba conocimientos de Angular y Git.
 
-##Compilación
+## Compilación
 
 Antes de todo, es necesario tener instalado Node.js y Angular 4 (1.4.10).
 
@@ -14,7 +14,7 @@ npm install
 ng serve
 ```
 
-##Instrucciones
+## Instrucciones
 
 La aplicación presenta un buscador de personas que tiene filtros de región y comuna como muestra la siguiente imagen.
 

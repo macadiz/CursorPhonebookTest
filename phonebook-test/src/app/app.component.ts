@@ -74,7 +74,7 @@ export class AppComponent {
   buscar(form) {
     let busquedaPersonas = this.personas.filter((p) => {
       var nombreCompleto = p.nombre ? p.nombre + (p.apellido ? " " + p.apellido : "") : p.apellido ? p.apellido : "";
-      return nombreCompleto.toLowerCase().indexOf(form.nombre.toLowerCase()) != -1 && p.activo == 1 && (this.selectedComuna ? p.direccion.comuna.id == this.selectedComuna : true);
+      return nombreCompleto.toLowerCase().indexOf(form.nombre_persona.toLowerCase()) != -1 && p.activo == 1 && (this.selectedComuna ? p.direccion.comuna.id == this.selectedComuna : true);
     });
     this.sinResultados = busquedaPersonas.length == 0;
     this.personasDisplay = busquedaPersonas != null ? busquedaPersonas : [];
@@ -91,5 +91,7 @@ export class AppComponent {
 
   setComuna(comuna): void {
     this.selectedComuna = comuna;
+    let nombre_persona = document.getElementById("nombre_persona").nodeValue;
+    this.buscar({ nombre_persona: nombre_persona ? nombre_persona : "" });
   }
 }
